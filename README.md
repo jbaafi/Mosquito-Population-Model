@@ -1,2 +1,2 @@
 # modeling_project
-Initial thoughts on possible project 
+A few research ideas on project

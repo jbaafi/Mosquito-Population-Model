@@ -7,7 +7,7 @@ rm(list = ls())
 require(PBSddesolve)
 
 # Set working directory for the script
-setwd("/Users/jbaafi/Desktop/R-codes")
+#setwd("/Users/jbaafi/Desktop/R-codes")
 
 a = 1
 b1 = 1

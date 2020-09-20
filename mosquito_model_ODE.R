@@ -267,8 +267,9 @@ y0 <- c(10, 0, 0, 0)
 x = dde(y = y0, func = mosquito, times = t, hbsize = 0)
 
 head(x)
-plot(t, x$y1, type = "l", ylim = c(0, 1))
-lines(t, x$y2, col="blue")
+plot(t, x$y1, type = "l", col = "orange", ylim = c(0, 1), xlab = "Time", ylab = "Fraction of population")
+lines(t, x$y2, col="red")
 lines(t, x$y3, col="green")
 lines(t, x$y4, col="blue")
-
+legend( "topright", c("E", "L", "P", "M"), 
+        text.col=c("orange", "red", "green","blue") )

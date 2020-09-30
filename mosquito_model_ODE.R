@@ -9,15 +9,16 @@ require(PBSddesolve)
 # Set working directory for the script
 setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
 
- a <-  1.5
- b <-  1
- c <- 1
- d <- 2
+#Temp = a + b1*sin(2 * pi * t/365)
+ a <-  20
+ b <-  0
+ c <- 80
+ d <- 0
  e <- 1
  t <- seq(0, 360, 1)
  #Temperature and Rainfall depends on time
  T <- function(t){
-   temp <- a + b*sin( pi * t/360)
+   temp <- a + b*sin(pi * t/360)
    return(temp)
  }
 
@@ -85,7 +86,7 @@ p_P <- function(t){
   return(pP)
 }
 
-#  The following function define the various rainfall dependent parameter functions. 
+#  The following functions define the various rainfall dependent parameter functions. 
 v_b <- function(t){
   R <- R(t)
   vb <- ((1+s_b)*exp(-r_b*(R-R_b)^2))/(exp(-r_b*(R-R_b)^2) + s_b)
@@ -118,13 +119,13 @@ q_E <- function(t){
 
 q_L <- function(t){
   R <- R(t)
-  qL <- 1 + (e_L*R)/(1+R(t))
+  qL <- 1 + (e_L*R)/(1+R)
   return(qL)
 }
 
 q_P <- function(t){
   R <- R(t)
-  qP <- 1 + (e_P*R)/(1+R(t))
+  qP <- 1 + (e_P*R)/(1+R)
   return(qP)
 }
 
@@ -228,10 +229,11 @@ s_E <- 1.5
 r_b <- 0.05
 r_P <- 0.05
 R_L <- 15
+
 T_b <- 22
 K <- 10^6
-delta_L <- 0.5
-R_P <- 0.05
+delta_L <- 0.2
+R_P <- 15
 sigma <- 0.5
 # Define the system of ODEs that controls the dynamics occurring in the various states 
 mosquito <- function(t, y){
@@ -261,13 +263,13 @@ mosquito <- function(t, y){
 }
 
 #List of initial values
-y0 <- c(10, 0, 0, 0)
+y0 <- c(10, 0, 0, 20)
 
 # Define a function to solve the ODEs numerically. 
 x = dde(y = y0, func = mosquito, times = t, hbsize = 0)
 
 head(x)
-plot(t, x$y1, type = "l", col = "orange", ylim = c(0, 1), xlab = "Time", ylab = "Fraction of population")
+plot(t, x$y1, type = "l", col = "orange", xlab = "Time", ylab = "Fraction of population")
 lines(t, x$y2, col="red")
 lines(t, x$y3, col="green")
 lines(t, x$y4, col="blue")

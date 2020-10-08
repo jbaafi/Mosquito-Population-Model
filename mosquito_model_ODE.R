@@ -269,7 +269,7 @@ y0 <- c(10, 0, 0, 20)
 x = dde(y = y0, func = mosquito, times = t, hbsize = 0)
 
 head(x)
-plot(t, x$y1, type = "l", col = "orange", xlab = "Time", ylab = "Fraction of population")
+plot(t, x$y1, type = "l", col = "orange", xlab = "Time", ylab = "States Dynamics")
 lines(t, x$y2, col="red")
 lines(t, x$y3, col="green")
 lines(t, x$y4, col="blue")

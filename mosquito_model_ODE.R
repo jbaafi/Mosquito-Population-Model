@@ -10,24 +10,42 @@ require(PBSddesolve)
 setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
 
 #Temp = a + b1*sin(2 * pi * t/365)
- a <-  20
+ #a <-  20
  b <-  0
  c <- 80
  d <- 0
  e <- 1
- t <- seq(0, 360, 1)
- #Temperature and Rainfall depends on time
- T <- function(t){
-   temp <- a + b*sin(pi * t/360)
-   return(temp)
- }
+ # t <- seq(0, 360, 1)
+ # #Temperature and Rainfall depends on time
+ # T <- function(t){
+ #   temp <- a + b*sin(pi * t/360)
+ #   return(temp)
+ # }
 
+ t <- seq(0, 365, 1)
+ a <- 0.00015
+ Tmax <- 365/2
+ i <- 50
+ 
+ T <- function(t){
+   Temp<- i*exp(-a*(t-Tmax)^2)
+   return(Temp)
+ }
+ 
+ Rmax <- 45
  R <- function(t){
-   rain <- c + d*sin(pi * t/365)
+   rain<- i*exp(-a*(t-Rmax)^2)
    return(rain)
  }
+ 
+ 
+ # R <- function(t){
+ #   rain <- c + d*sin(pi * t/365)
+ #   return(rain)
+ # }
 
 
+ 
 # T <- function(t){
 #   T <- T(t)
 #   return(T)

@@ -9,200 +9,174 @@ require(PBSddesolve)
 # Set working directory for the script
 setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
 
-#Temp = a + b1*sin(2 * pi * t/365)
- #a <-  20
- b <-  0
- c <- 80
- d <- 0
+#Parameters for seasonal temperature and rainfall
+a <- 20
+ b <-  0.3
+ c <- 20
+ d <- 10
  e <- 1
- # t <- seq(0, 360, 1)
- # #Temperature and Rainfall depends on time
- # T <- function(t){
- #   temp <- a + b*sin(pi * t/360)
- #   return(temp)
- # }
-
- t <- seq(0, 365, 1)
- a <- 0.00015
- Tmax <- 365/2
- i <- 50
+ t <- seq(0, 360, 1)
  
+ #Function for temperature
  T <- function(t){
-   Temp<- i*exp(-a*(t-Tmax)^2)
-   return(Temp)
+   temp <- a + b*sin(2*pi * t/360)
+   return(temp)
  }
+
+ # t <- seq(0, 365, 1)
+ # a <- 0.00015
+ # Tmax <- 365/2
+ # i <- 25
+ # 
+ # T <- function(t){
+ #   Temp<- i*exp(-a*(t-Tmax)^2)
+ #   return(Temp)
+ # }
+ # 
+ # Rmax <- 45
+ # R <- function(t){
+ #   rain<- i*exp(-a*(t-Rmax)^2)
+ #   return(rain)
+ # }
+ # 
  
- Rmax <- 45
+ #Function for rainfall
  R <- function(t){
-   rain<- i*exp(-a*(t-Rmax)^2)
+   rain <- c + d*sin(2*pi * t/365)
    return(rain)
  }
  
- 
- # R <- function(t){
- #   rain <- c + d*sin(pi * t/365)
- #   return(rain)
- # }
-
-
- 
-# T <- function(t){
-#   T <- T(t)
-#   return(T)
-# }
-# 
-# R <- function(t){
-#   R <- R(t)
-#   return(R)
-# }
 # I will now define the various temperature dependent parameter functions. 
 u_b <- function(t){
-  T <- T(t)
-  ubT <- exp(-a_b*(T-T_b)^2)
+  ubT <- exp(-a_b*(T(t)-T_b)^2)
   return(ubT)
 }
 
 mu_M <- function(t){
-  T <- T(t)
-  muMT <- c_M*(T-T_Mstar)^2 + d_M
+  muMT <- c_M*(T(t)-T_Mstar)^2 + d_M
   return(muMT)
 }
 
+# Effect of temperature on the hatching rate
 g_E <- function(t){
-  T <- T(t)
-  gE <- exp(-a_E*(T-T_E)^2)
+  gE <- exp(-a_E*(T(t)-T_E)^2)
   return(gE)
 }
 
+# Effect of temperature on transition rate F_L
 g_L <- function(t){
-  T <- T(t)
-  gL <- exp(-a_L*(T-T_L)^2)
+  gL <- exp(-a_L*(T(t)-T_L)^2)
   return(gL)
 }
-
+# Effect of temperature on the transition rate F_P
 g_P <- function(t){
-  T <- T(t)
-  gP <- exp(-a_P*(T-T_P)^2)
+  gP <- exp(-a_P*(T(t)-T_P)^2)
   return(gP)
 }
 
+# Effect of temperature on mortality rate of eggs
 p_E <- function(t){
-  T <- T(t)
-  pE <- c_E*(T-T_Estar)^2 + d_E
+  pE <- c_E*(T(t)-T_Estar)^2 + d_E
   return(pE)
 }
 
+# Effect of temperature on mortality rate of larvae
 p_L <- function(t){
-  T <- T(t)
-  pL <- c_L*(T-T_Lstar)^2 + d_L
+  pL <- c_L*(T(t)-T_Lstar)^2 + d_L
   return(pL)
 }
 
+# Effect of temperature on mortality rate of pupae
 p_P <- function(t){
-  T <- T(t)
-  pP <- c_P*(T-T_Pstar)^2 + d_P
+  pP <- c_P*(T(t)-T_Pstar)^2 + d_P
   return(pP)
 }
 
-#  The following functions define the various rainfall dependent parameter functions. 
+#  The following functions define the various rainfall dependent parameters 
 v_b <- function(t){
-  R <- R(t)
-  vb <- ((1+s_b)*exp(-r_b*(R-R_b)^2))/(exp(-r_b*(R-R_b)^2) + s_b)
+  vb <- ((1+s_b)*exp(-r_b*(R(t)-R_b)^2))/(exp(-r_b*(R(t)-R_b)^2) + s_b)
   return(vb)
 }
 
+# Effect of rainfall on hatching rate of eggs
 h_E <- function(t){
-  R <- R(t)
-  hE <- ((1+s_E)*exp(-r_E*(R-R_E)^2))/(exp(-r_E*(R-R_E)^2) + s_E)
+  hE <- ((1+s_E)*exp(-r_E*(R(t)-R_E)^2))/(exp(-r_E*(R(t)-R_E)^2) + s_E)
   return(hE)
 }
 
+# Effect of rainfall on transition rate from eggs to larvae
 h_L <- function(t){
-  R <- R(t)
-  hL <- ((1+s_L)*exp(-r_L*(R-R_L)^2))/(exp(-r_L*(R-R_L)^2) + s_L)
+  hL <- ((1+s_L)*exp(-r_L*(R(t)-R_L)^2))/(exp(-r_L*(R(t)-R_L)^2) + s_L)
   return(hL)
 }
 
+# Effect of rainfall on transition rate from larvae to pupae
 h_P <- function(t){
-  R <- R(t)
-  hP <- ((1+s_P)*exp(-r_P*(R-R_P)^2))/(exp(-r_P*(R-R_P)^2) + s_P)
+  hP <- ((1+s_P)*exp(-r_P*(R(t)-R_P)^2))/(exp(-r_P*(R(t)-R_P)^2) + s_P)
   return(hP)
 }
 
+# Effect of rainfall on mortality rate of eggs
 q_E <- function(t){
-  R <- R(t)
-  qE <- 1 + (e_E*R)/(1+R(t))
+  qE <- 1 + (e_E*R(t))/(1+R(t))
   return(qE)
 }
 
+# Effect of rainfall on mortality rate of larvae
 q_L <- function(t){
-  R <- R(t)
-  qL <- 1 + (e_L*R)/(1+R)
+  qL <- 1 + (e_L*R(t))/(1+R(t))
   return(qL)
 }
 
+# Effect of rainfall on mortality rate of pupae
 q_P <- function(t){
-  R <- R(t)
-  qP <- 1 + (e_P*R)/(1+R)
+  qP <- 1 + (e_P*R(t))/(1+R(t))
   return(qP)
 }
 
-# These lines of code defines the function for the mortality rate at the various life estages
+# Natural mortality rate of eggs
 mu_E <- function(t){
-  T <- T(t)
-  R <- R(t)
-  muE <- p_E(T)*q_E(R)
+  muE <- p_E(T(t))*q_E(R(t))
   return(muE)
 }
-
+# Natural mortality rate of larvae
 mu_L <- function(t){
-  T <- T(t)
-  R <- R(t)
-  muL <- p_L(T)*q_L(R)
+  muL <- p_L(T(t))*q_L(R(t))
   return(muL)
 }
 
+# Natural mortality rate of pupae
 mu_P <- function(t){
-  T <- T(t)
-  R <- R(t)
-  muP <- p_P(T)*q_P(R)
+  muP <- p_P(T(t))*q_P(R(t))
   return(muP)
 }
 
-# Define the transition rates in the model. 
+# Hatching rate of eggs
 F_E <- function(t){
-  T <- T(t)
-  R <- R(t)
-  FE <- alpha_E*g_E(T)*h_E(R)
+  FE <- alpha_E*g_E(T(t))*h_E(R(t))
   return(FE)
 }
 
+# Development rate of larvae into pupae
 F_L <- function(t){
-  T <- T(t)
-  R <- R(t)
-  FL <- alpha_L*g_L(T)*h_L(R)
+  FL <- alpha_L*g_L(T(t))*h_L(R(t))
   return(FL)
 }
 
+# Development rate of pupae into adult mosquitoes
 F_P <- function(t){
-  T <- T(t)
-  R <- R(t)
-  FP <- alpha_P*g_P(T)*h_P(R)
+  FP <- alpha_P*g_P(T(t))*h_P(R(t))
   return(FP)
 }
 
-# Define the parameter b(T, R), for the rate of eggs laid per oviposition
+# Dfine the parameter b(T, R), which is the eggs oviposition rate
 ovipositor <- function(t){
-  T <- T(t)
-  R <- R(t)
-  bTR <- alpha_b*u_b(T)*v_b(R)
+  bTR <- alpha_b*u_b(T(t))*v_b(R(t))
   return(bTR)
 }
 
-# Define the Verhulst-Pearl logistic oviposition function as follows
+# The Verhulst-Pearl logistic oviposition function
 B <- function(t, M){
-  T <- T(t)
-  R <- R(t)
   ovip <- ovipositor(t)*(1-M/K)
   return(ovip)
 }
@@ -253,7 +227,8 @@ K <- 10^6
 delta_L <- 0.2
 R_P <- 15
 sigma <- 0.5
-# Define the system of ODEs that controls the dynamics occurring in the various states 
+
+# Function for the system of equations
 mosquito <- function(t, y){
   # The number of eggs
   E = y[1]
@@ -264,7 +239,7 @@ mosquito <- function(t, y){
   # The number of Matured (Adult) mosquitoes
   M = y[4]
   
-  # The system of ODEs
+  # The system of equatiions
   dE <- M*B(t, M) - (F_E(t) + mu_E(t))*E
   dL <- F_E(t)*E - (F_L(t) + mu_L(t) + delta_L*L)*L
   dP <- F_L(t)*L - (F_P(t) + mu_P(t))*P
@@ -280,13 +255,16 @@ mosquito <- function(t, y){
 
 }
 
-#List of initial values
+#Initial conditions
 y0 <- c(10, 0, 0, 20)
 
-# Define a function to solve the ODEs numerically. 
-x = dde(y = y0, func = mosquito, times = t, hbsize = 0)
+# Numerical integration. 
+x <-  dde(y = y0, func = mosquito, times = t, hbsize = 0)
+x <- data.frame(x)
 
 head(x)
+
+# Plots of variables against time.
 plot(t, x$y1, type = "l", col = "orange", xlab = "Time", ylab = "States Dynamics")
 lines(t, x$y2, col="red")
 lines(t, x$y3, col="green")

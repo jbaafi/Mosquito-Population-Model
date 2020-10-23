@@ -52,6 +52,7 @@ u_b <- function(t){
   return(ubT)
 }
 
+# Natural mortality of adult mosquitoes
 mu_M <- function(t){
   muMT <- c_M*(T(t)-T_Mstar)^2 + d_M
   return(muMT)

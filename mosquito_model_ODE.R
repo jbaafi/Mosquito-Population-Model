@@ -266,7 +266,7 @@ x <- data.frame(x)
 head(x)
 
 # Plots of variables against time.
-plot(t, x$y1, type = "l", col = "orange", xlab = "Time", ylab = "States Dynamics")
+plot(t, x$y1, type = "l", col = "orange", xlab = "time", ylab = "variables")
 lines(t, x$y2, col="red")
 lines(t, x$y3, col="green")
 lines(t, x$y4, col="blue")

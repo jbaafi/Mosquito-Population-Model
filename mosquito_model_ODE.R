@@ -3,25 +3,24 @@
 # clears the workspace
 rm(list = ls())
 
-#Load R package for solving DEs
+#Load R package for solving Differential equations
 require(PBSddesolve)
 
 # Set working directory for the script
 setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
 
-#Parameters for seasonal temperature and rainfall
+#Parameters for seasonal temperature
 a <- 20
- b <-  0.3
- c <- 20
- d <- 10
- e <- 1
- t <- seq(0, 360, 1)
- 
- #Function for temperature
- T <- function(t){
-   temp <- a + b*sin(2*pi * t/360)
-   return(temp)
- }
+b <-  0
+t <- seq(0, 360, 1)
+
+#Function for temperature
+T <- function(t){
+  temp <- a + b*sin(2*pi * t/360 - 0.5)
+  return(temp)
+}
+
+
 
  # t <- seq(0, 365, 1)
  # a <- 0.00015
@@ -39,7 +38,9 @@ a <- 20
  #   return(rain)
  # }
  # 
- 
+
+ c <- 20
+ d <- 0
  #Function for rainfall
  R <- function(t){
    rain <- c + d*sin(2*pi * t/365)
@@ -171,20 +172,20 @@ F_P <- function(t){
 }
 
 # Dfine the parameter b(T, R), which is the eggs oviposition rate
-ovipositor <- function(t){
+ovip <- function(t){
   bTR <- alpha_b*u_b(T(t))*v_b(R(t))
   return(bTR)
 }
 
 # The Verhulst-Pearl logistic oviposition function
 B <- function(t, M){
-  ovip <- ovipositor(t)*(1-M/K)
+  ovip <- ovip(t)*(1-M/K)
   return(ovip)
 }
 
 # Here are the parameter values used in the model. 
 alpha_b <- 300
-alpha_P <- 0.5
+alpha_P <- 1.5
 T_Pstar <- 20
 T_L <- 22
 c_E <- 0.001
@@ -257,7 +258,7 @@ mosquito <- function(t, y){
 }
 
 #Initial conditions
-y0 <- c(10, 0, 0, 20)
+y0 <- c(10, 0, 0, 10)
 
 # Numerical integration. 
 x <-  dde(y = y0, func = mosquito, times = t, hbsize = 0)

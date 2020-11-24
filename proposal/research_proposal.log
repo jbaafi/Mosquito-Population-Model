@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  23 NOV 2020 21:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  23 NOV 2020 22:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -685,41 +685,104 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.34 \newpage
-              [1] [2] [3] [4] [5] [6] [7] (./research_proposal.bbl [8] [9])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
+              [1]
 
-[10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
- (./research_proposal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
-Package rerunfilecheck Info: File `research_proposal.out' has not changed.
-(rerunfilecheck)             Checksum: 842F127D0194DCFAB75AF82D4057C506;508.
- ) 
+LaTeX Warning: Citation `beck2013effect' undefined on input line 37.
+
+
+LaTeX Warning: Citation `abdelrazec2017mathematical' undefined on input line 37
+.
+
+
+LaTeX Warning: Citation `hamdan2020effect' undefined on input line 37.
+
+
+LaTeX Warning: Citation `abiodun2016modelling' undefined on input line 37.
+
+
+LaTeX Warning: Citation `WikBlack5' undefined on input line 37.
+
+
+LaTeX Warning: Citation `agusto2015qualitative' undefined on input line 39.
+
+
+LaTeX Warning: Citation `mordecai2013optimal' undefined on input line 39.
+
+
+LaTeX Warning: Citation `hurford2019regional' undefined on input line 41.
+
+[2]
+
+LaTeX Warning: Citation `beck2013temperature' undefined on input line 46.
+
+
+LaTeX Warning: Citation `Ocspp2016SuccessIM' undefined on input line 48.
+
+
+LaTeX Warning: Citation `beck2017importance' undefined on input line 50.
+
+
+LaTeX Warning: Citation `ewing2016modelling' undefined on input line 55.
+
+[3] [4]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Citation `bayoh2004temperature' undefined on input line 144.
+
+
+LaTeX Warning: Citation `bayoh2003effect' undefined on input line 144.
+
+
+LaTeX Warning: Citation `yang2011follow' undefined on input line 144.
+
+
+LaTeX Warning: Citation `esteva2015assessing' undefined on input line 144.
+
+[5]
+
+LaTeX Warning: Reference `autonomous_model' on page 6 undefined on input line 1
+62.
+
+[6]
+
+LaTeX Warning: Reference `autonomous_model' on page 7 undefined on input line 1
+67.
+
+<mosquito.pdf, id=163, 844.15375pt x 597.23125pt>
+File: mosquito.pdf Graphic file (type pdf)
+<use mosquito.pdf>
+Package pdftex.def Info: mosquito.pdf  used on input line 176.
+(pdftex.def)             Requested size: 364.19667pt x 257.67017pt.
+)
+Runaway argument?
+{Population Dynamics of mosquitoes obtained from \ref {autonomous_mod\ETC.
+! File ended while scanning use of \@xdblarg.
+<inserted text> 
+                \par 
+<*> research_proposal.tex
+                         
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+! Emergency stop.
+<*> research_proposal.tex
+                         
+*** (job aborted, no legal \end found)
+
+ 
 Here is how much of TeX's memory you used:
- 12568 strings out of 480608
- 183137 string characters out of 5903631
- 495921 words of memory out of 5000000
- 28151 multiletter control sequences out of 15000+600000
- 542590 words of font info for 67 fonts, out of 8000000 for 9000
+ 12538 strings out of 480608
+ 182745 string characters out of 5903631
+ 497066 words of memory out of 5000000
+ 28135 multiletter control sequences out of 15000+600000
+ 542074 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,10n,37p,1233b,555s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
-cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
-/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
-texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/t
-exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/te
-xlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on research_proposal.pdf (11 pages, 145111 bytes).
-PDF statistics:
- 297 PDF objects out of 1000 (max. 8388607)
- 270 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
- 73 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 34i,10n,37p,1233b,476s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -254,6 +254,39 @@ Esteva, L.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Ewing%
+, Cobbold%
+, Purse%
+, Nunn%
+\BCBL {}\ \BBA {} White%
+}{%
+Ewing%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+ewing2016modelling}
+\APACinsertmetastar {%
+ewing2016modelling}%
+\begin{APACrefauthors}%
+Ewing, D\BPBI A.%
+, Cobbold, C\BPBI A.%
+, Purse, B.%
+, Nunn, M.%
+\BCBL {}\ \BBA {} White, S\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Modelling the effect of temperature on the seasonal
+  population dynamics of temperate mosquitoes} {Modelling the effect of
+  temperature on the seasonal population dynamics of temperate
+  mosquitoes}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of theoretical biology}{400}{}{65--79}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Hamdan%
 \ \BBA {} Kilicman%
 }{%

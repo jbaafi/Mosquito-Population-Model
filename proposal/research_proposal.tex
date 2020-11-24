@@ -43,24 +43,24 @@ This project will develop a stage-structured non-autonomous ordinary differentia
 Thus, this project seeks to modify and improve current models’ ability to model the population dynamics of mosquitoes. It also seeks to analyse the effects of regional variation in climate on population dynamics and stage structure of mosquitoes. The model will also seek to analyse some region-specific management strategies such as application of larvicides and adulticides. This work also seeks to address questions as, what time of the year should controls be implemented to control or eradicate the mosquitoes?. We also analyse the effectiveness of proper drainage systems, use of treated bed nets in controlling mosquito population.
 
 \section{Background and Justification}
-Malaria is a life-threatening disease caused by parasites that are transmitted to people through the bites of infectious female Anopheles mosquitoes \cite{WikBlack5, beck2013temperature}. It is estimated that there were 228 million cases of malaria worldwide with 405 000 deaths in 2018 \cite{WikBlack5}). In 2018, nearly half of the world's population was at risk of malaria with most cases and deaths occurring in sub-Saharan Africa \cite{WikBlack5}).
+Malaria is a life-threatening disease caused by parasites that are transmitted to people through the bites of infectious female Anopheles mosquitoes \cite{WikBlack5, beck2013temperature}. It is estimated that there were 228 million cases of malaria worldwide with 405 000 deaths in 2018 \cite{WikBlack5}. In 2018, nearly half of the world's population was at risk of malaria with most cases and deaths occurring in sub-Saharan Africa \cite{WikBlack5}.
  
-Vector control is the main way to prevent and reduce malaria transmission (WHO, 2020). The reduction of human-vector contacts reduces the population density of vectors and hence, malaria transmission. Several vector management strategies have been implemented over the years and have proved to be effective in providing protection against infection \cite{Ocspp2016SuccessIM}. Mosquito breeding source reduction and management remain effective strategies for malaria vector control \cite{Ocspp2016SuccessIM}.
+Vector control is the main way to prevent and reduce malaria transmission \cite{WikBlack5}. The reduction of human-vector contacts reduces the population density of vectors and hence, malaria transmission. Several vector management strategies have been implemented over the years and have proved to be effective in providing protection against infection \cite{Ocspp2016SuccessIM}. Mosquito breeding source reduction and management remain effective strategies for malaria vector control \cite{Ocspp2016SuccessIM}.
 
 The mosquito model establishes the population abundance of both the juvinile and adult mosquitoes and deepen our understanding on the impact of climate on mosquito population dynamics. This also highlight the importance of incorporating detail vector biology into models for predicting mosquito population abundance and the risk of malaria incidence \cite{beck2013effect, beck2017importance}. Also the mosquito-human malaria model provides the framework for analysis of controls. 
 
 \section{Goals and Objectives}
 %The  main goals  of  this  project  is to  shapen  our  understanding  of the  effect  of temperature and rainfall on mosquito population and  to  analyze  the effectiveness of control strategies such as lavicides and adulticides through the development of ordinary differential equation models.
 
-The goal of this project is to build a temperature and rainfall dependent, stage-structured ordinary differential equation model based on \cite{abdelrazec2017mathematical, hamdan2020effect} to better understand how climate affects mosquito abundance and determines risk of malaria incidence. 
+The goal of this project is to build a temperature and rainfall dependent, stage-structured ordinary differential equation model based on \cite{abdelrazec2017mathematical, hamdan2020effect, ewing2016modelling} to better understand how climate affects mosquito abundance and determines risk of malaria incidence. 
 
 Mosquito life stages are strongly dependent on temperature and rainfall and several studies have been able to predict mosquito population abundance. Most of these studies are done on special mosquito species and a given geographical areas. Hence, general mosquito models can be improved. 
 
 Thus, this project has for it objectives;
 
 \begin{itemize}
-\item To develop a stage-structured model that incorporate temperature and rainfall.
-\item To predict mosquito abundances and malaria risk for a given geographical area.
+\item To develop a stage-structured population model that incorporate temperature and rainfall.
+\item To predict mosquito abundances and malaria risk according to regional climate patterns.
 \item To analyze the effect of control measures at the various life stages of mosquito.
 \item To compare the effectiveness of controls and to estimate the best periods where controls will be effective. 
 \item To build a combined mosquito-human malaria transmisson model to analyze how climate determines risk.  
@@ -68,17 +68,17 @@ Thus, this project has for it objectives;
 
 
 \section{Methods}
-We develop a stage-structured ordinary differential equation based on \cite{abdelrazec2017mathematical, hamdan2020effect, abiodun2016modelling} to emphasize the impact of temperature and rainfall on mosquito population dynamics. The novelty in seen in the fact that natural mortality rate at the various life stages are introduced and different regions leading to different climate patterns will be studied. The basic reproduction number of both the autonomous and the non-autonomous models will be studied and used to analyze controls in the autonomous system. Sensitivity of the model to parameters will be analyzed through sensitivity analysis. 
+We develop a stage-structured ordinary differential equation model based on \cite{abdelrazec2017mathematical, hamdan2020effect, abiodun2016modelling, ewing2016modelling} to emphasize the impact of temperature and rainfall on mosquito population dynamics. The novelty in seen in the fact that natural mortality rate at the various life stages are introduced and different regions leading to different climate patterns will be studied. The basic reproduction number of both the autonomous and the non-autonomous models will be studied and used to analyze controls in the autonomous system. Sensitivity of the model to parameters will be analyzed through sensitivity analysis. 
 
-Secondly, the mosquito population model is modified to incorporate control strategies. We will analyze the effectiveness of larvicides and adulticides and estimate the correct times where implementation of controls will be much effective \cite{Ocspp2016SuccessIM}.
+Also, the mosquito population model is modified to incorporate control strategies. We will analyze the effectiveness of larvicides and adulticides and estimate the correct times where implementation of controls will be much effective \cite{Ocspp2016SuccessIM}.
 
-Thirdly, we extend the non-automous mosquito model to include human compartments to explore the impact of climate variability on the incidence of malaria in different regions. sensitivity of the model to climate-dependent parameters will be analyzed to establish how climate influences parameters to determine risk \cite{abiodun2016modelling}. 
+Again, we extend the non-automous mosquito model to include human compartments to explore the impact of climate variability on the incidence of malaria in different regions. sensitivity of the model to climate-dependent parameters will be analyzed to establish how climate influences parameters to determine risk \cite{abiodun2016modelling}. 
 
 Also, latency in malaria infections and it's impact on the disease dynamics will be analyzed using a delay differential equation version of the ordinary differential equation model.
 
 
 \subsection{Model}
-The framework of the stage-structured temperature and rainfall-dependent mosquito population model reflects details of the mosquito life-cycle \cite{abdelrazec2017mathematical, hamdan2020effect, beck2013effect}. The model allows us to incorporate stage specific life history rate and process. The four main life stages that constitutes the stage structuring are eggs, larvae, pupae and adults. We assume that desity-dependence is only experienced in the larvae stage. Each life stage has a natural mortality as well as climate dependent mortality rate.  
+The framework of the stage-structured temperature and rainfall-dependent mosquito population model reflects details of the mosquito life-cycle \cite{abdelrazec2017mathematical, hamdan2020effect, beck2013effect, ewing2016modelling}. The model allows us to incorporate stage specific life history rate and process. The four main life stages that constitutes the stage structuring are eggs, larvae, pupae and adults. We assume that desity-dependence is only experienced in the larvae stage. Each life stage has a natural mortality as well as climate dependent mortality rate.  
 
 The system of equations that describe the model are as follows:
 
@@ -93,9 +93,9 @@ The system of equations that describe the model are as follows:
 	\end{align}
 \end{subequations}
 
-where $T = T(t)$ and $R=R(t)$ represent temperature and rainfall respectively \cite{abdelrazec2017mathematical}. $T$ and $R$ are bounded periodic functions determined from climate data.
+where $T = T(t)$ and $R=R(t)$ represent temperature and rainfall respectively. $T$ and $R$ are bounded periodic functions determined from climate data \cite{abdelrazec2017mathematical}.
 
-A detailed describtion of all parameters used in the model are given in Table \ref{tab:table1} and Table \ref{tab:table2} respectively. 
+A detailed description of all variables and parameters used in the model are given in Table \ref{tab:table1} and Table \ref{tab:table2} respectively. 
 
 \begin{table}[h!]
 	\begin{center}
@@ -167,7 +167,7 @@ D = \left\{ (E, L, P, A) \in R^4 : E, L, P, A \geq 0 \right\}.
 Analysis of this model \ref{autonomous_model} indicates that the threshold quantity, $R_m$ given by 
 \begin{equation}
 	\label{R_m}
-	R_m = \frac{\sigma\phi\delta_E\delta_L\delta_P}{(\mu_A+\pi_A)(\delta_P+\mu_P+\pi_P)(\delta_L+\mu_L+\pi_L + \sigma_L)(\delta_E+\mu_E+\pi_E)}.
+	R_m = \frac{\tau\phi\delta_E\delta_L\delta_P}{(\mu_A+\pi_A)(\delta_P+\mu_P+\pi_P)(\delta_L+\mu_L+\pi_L + \sigma_L)(\delta_E+\mu_E+\pi_E)}.
 \end{equation}
 
 $R_m$ is the vectorial reproduction number also known as basic offspring number. It measures the average expected number of female adult offsprings produced by a single female mosquito during it's life time \cite{abdelrazec2017mathematical, hamdan2020effect}. 
@@ -181,7 +181,7 @@ It is expected that the mosquito-malaria model will produce a reasonable fit wit
 
 
 \section{Time table and Milestones}
-
+This project begins with a literature review on mosquito life cycle and development, malaria transmission, climate effect on mosquito population, population models and control strategies in May 2020 and continues until October 2020. My research proposal writing begins in September 2020 and will be presented to the Memorial University Biology 7000 Graduate Core Seminar class. This proposal will be updated and presented to my thesis committee in  late January 2021. The baseline model for the first chapter of my thesis will be derived and analyzed in October and continues until April 2021. I expect to finish writing the first chapter of my thesis by May 2021. 
 
 
 

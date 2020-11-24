@@ -14,45 +14,45 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: References.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in beck2013temperature
-You've used 15 entries,
+You've used 16 entries,
             6951 wiz_defined-function locations,
-            1369 strings with 13820 characters,
-and the built_in function-call counts, 33918 in all, are:
-= -- 4173
-> -- 274
-< -- 1830
-+ -- 2005
-- -- 36
-* -- 2303
-:= -- 6631
-add.period$ -- 61
-call.type$ -- 15
-change.case$ -- 260
+            1375 strings with 14063 characters,
+and the built_in function-call counts, 36540 in all, are:
+= -- 4484
+> -- 301
+< -- 1976
++ -- 2173
+- -- 38
+* -- 2485
+:= -- 7131
+add.period$ -- 65
+call.type$ -- 16
+change.case$ -- 277
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 867
-empty$ -- 1135
-format.name$ -- 478
-if$ -- 6122
+cite$ -- 33
+duplicate$ -- 948
+empty$ -- 1219
+format.name$ -- 528
+if$ -- 6586
 int.to.chr$ -- 0
-int.to.str$ -- 45
+int.to.str$ -- 48
 missing$ -- 0
-newline$ -- 379
-num.names$ -- 112
-pop$ -- 483
+newline$ -- 409
+num.names$ -- 120
+pop$ -- 515
 preamble$ -- 1
-purify$ -- 64
+purify$ -- 68
 quote$ -- 0
-skip$ -- 1967
+skip$ -- 2113
 stack$ -- 0
-substring$ -- 2181
-swap$ -- 496
-text.length$ -- 50
+substring$ -- 2359
+swap$ -- 537
+text.length$ -- 52
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 1258
+type$ -- 1338
 warning$ -- 1
-while$ -- 166
+while$ -- 182
 width$ -- 0
-write$ -- 493
+write$ -- 536
 (There was 1 warning)

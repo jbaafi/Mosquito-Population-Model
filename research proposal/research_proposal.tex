@@ -123,7 +123,6 @@ A detailed describtion of all parameters used in the model are given in Table \r
 			\textbf{Parameters} & \textbf{Description} \\
 			\hline
 			$\phi$ & Egg oviposition rate \\
-			$\tau$ & Proportion of new adult female mosquitoes \\
 			$K$ & Carrying capacity of the female adult mosquitoes \\
 			$\delta_E(T, R)$ & Hatching rate of eggs \\
 			$\delta_L(T, R)$ & Transition rate from larvae into pupae\\
@@ -137,6 +136,7 @@ A detailed describtion of all parameters used in the model are given in Table \r
 			$\mu_P$ & Natural mortality rate of pupae\\
 			$\mu_A$ & Natural mortality rate of adults\\
 			$\sigma_L$ & Density-dependent mortality rate of larvae\\
+			$\tau$ & Proportion of new adult female mosquitoes \\
 		\end{tabular}
 	\end{center}
 \end{table}
@@ -167,7 +167,7 @@ D = \left\{ (E, L, P, A) \in R^4 : E, L, P, A \geq 0 \right\}.
 Analysis of this model \ref{autonomous_model} indicates that the threshold quantity, $R_m$ given by 
 \begin{equation}
 	\label{R_m}
-	R_m = \frac{\sigma\phi\delta_E\delta_L\delta_P}{(\mu_A+\pi_A)(\delta_P+\mu_P+\pi_P)(\delta_L+\mu_L+\pi_L + \sigma_L)(\delta_E+\mu_E+\pi_E)}.
+	R_m = \frac{\tau\phi\delta_E\delta_L\delta_P}{(\mu_A+\pi_A)(\delta_P+\mu_P+\pi_P)(\delta_L+\mu_L+\pi_L + \sigma_L)(\delta_E+\mu_E+\pi_E)}.
 \end{equation}
 
 $R_m$ is the vectorial reproduction number also known as basic offspring number. It measures the average expected number of female adult offsprings produced by a single female mosquito during it's life time \cite{abdelrazec2017mathematical, hamdan2020effect}. 
@@ -177,7 +177,6 @@ Simulating this model \ref{autonomous_model} produces the following population d
 
 
 It is expected that the mosquito-malaria model will produce a reasonable fit with observe data. In particular, they will capture all the spikes in malaria prevalence. Our findings will further highlight the importance of climate on malaria transmission and show the seasonality of malaria epidemics. 
-
 
 
 \section{Time table and Milestones}

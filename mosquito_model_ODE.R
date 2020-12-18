@@ -7,7 +7,7 @@ rm(list = ls())
 require(PBSddesolve)
 
 # Set working directory for the script
-setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
+#setwd("/Users/jbaafi/Desktop/R-codes/mosquito_population/modeling_project")
 
 #Parameters for seasonal temperature
 a <- 20

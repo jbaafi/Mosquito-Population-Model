@@ -1,6 +1,6 @@
 #created by: Joseph Baafi
 #Date: November 10, 2020
-#Purpose: To analyze mosquito population dynamics model
+#Purpose: To analyze mosquito population dynamics (autonomous model)
 
 #Clear workspace
 rm(list = ls())
@@ -64,6 +64,7 @@ lines(out$time, out$L, col = "yellow")
 lines(out$time, out$P, col = "red")
 legend( "topright", c("A(t)", "E(t)", "L(t)", "P(t)"), 
         text.col=c("blue", "green", "yellow","red") )
+
 ##################################################################################################
 # This lines of code helps to find the basic reproduction number of the model above
 phi = 10.7

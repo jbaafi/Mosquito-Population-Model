@@ -291,29 +291,42 @@ c_A <- 0.08841
 T_A <- 21.24746
 d_A <- 14.92552
 
+p <- function(x){
+  ind <- which(temp(t)<5)
+  x[ind] <- c_A*exp(((4-T_A)/d_A)^4)
+}
 # This function defines adult mortality as a function of temperature
 adult.mortality <- function(t){
   adult.mortality <-  c_A*exp(((temp(t)-T_A)/d_A)^4)
+  # if(temp(t)<=5){
+  # adult.mortality <-  min(c_A*exp(((temp(t)-T_A)/d_A)^4), c_A*exp(((3-T_A)/d_A)^4))
+  # }
+  # else{adult.mortality <-  c_A*exp(((temp(t)-T_A)/d_A)^4)
+  # }
   return(adult.mortality)
 }
 
-df8 <- data.frame(t, adult.mortality(t))
+c_A*exp(((20-T_A)/d_A)^4)
+
+df8 <- data.frame(t, p(adult.mortality(t)))
 
 #plot of adult mortality as a function of temperature as a function of time
 ggplot(df8, aes(x=t, y=adult.mortality(t)))+
   geom_line()
 
 # Other model parameters [Values obtained from Hamdan and Kilicman, 2020]
-mu_E <- 0.47
-mu_L <- 0.47
-mu_P <- 0.47
+mu_E <- 0.157
+mu_L <- 0.157
+mu_P <- 0.157
 mu_A <- 0.1
 tau <- 0.5 # fraction of mosquitoes that emerge as adult females. 
 alpha_b <- 300 # Maximum number of eggs laid per oviposition [value taken from Abdelrazec & Gumel]
 # Ignore density-dependent mortality for now.
+k=10^6
+parameters <- c(mu_E, mu_L, mu_P, mu_A, tau, alpha_b)
 
 # Function for the system of equations
-model <- function(t, y){
+model <- function(t, y, ...){
   # The number of eggs
   E = y[1]
   # The number of Larvae
@@ -321,27 +334,25 @@ model <- function(t, y){
   # The number of Pupa
   P = y[3]
   # The number of Matured (Adult) mosquitoes
-  M = y[4]
+  A = y[4]
   
   # The system of equations
-  dE <- alpha_b*gen(t)*M - (egg.dev(t) + egg.mortality(t) + mu_E)*E
+  dE <- alpha_b*gen(t)*A*(1-A/k) - (egg.dev(t) + egg.mortality(t) + mu_E)*E
   dL <- egg.dev(t)*E - (larva.dev(t) + larva.mortality(t) + mu_L)*L
   dP <- larva.dev(t)*L - (pupa.dev(t) + pupa.mortality(t) + mu_P)*P
-  dM <- tau*pupa.dev(t)*P - (adult.mortality(t) + mu_A)*M
-  return(c(dE, dL, dP, dM))
+  dA <- tau*pupa.dev(t)*P - (p(adult.mortality(t)) + mu_A)*A
+  return(list(c(dE, dL, dP, dA)))
   
 }
-
 #Initial conditions
 y0 <- c(100, 0, 0, 10)
 
+#time steps
+#times <- seq(0, 100, by = 0.01)
+             
 # Numerical integration. 
-out <-  ode(y = y0, func = model, times = t, parms = )
+out <-  ode(y = y0, func = model, times = t, parms = parameters)
 out <- data.frame(out)
-
-head(out)
-
-
 
 
 

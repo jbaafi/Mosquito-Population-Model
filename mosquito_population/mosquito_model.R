@@ -146,7 +146,7 @@ summary(fitprecip.lm)
 ################################################################################
 
 #Model parameters
-a <-  8.9231 #mean(climate.df$Mean.Temp)
+a <-  mean(climate.df$Mean.Temp) #  8.9231 
 b1 <- -8.7635
 b2 <- b1
 
@@ -343,9 +343,6 @@ head(out)
 
 
 
-# Define other juvinile mortality functions (all the tree juvinile stages can assume same function)
-#and density dependent mortality function (from Beck-Johnson et al, 2013)
-# Find natural mortality rates from Hamdan et al, to run the model. 
 
 
 

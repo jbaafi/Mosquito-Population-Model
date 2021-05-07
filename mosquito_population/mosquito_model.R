@@ -292,7 +292,7 @@ T_A <- 21.24746
 d_A <- 14.92552
 
 p <- function(x){
-  ind <- which(temp(t)<5)
+  ind <- which(temp(t)<rep(5))
   x[ind] <- c_A*exp(((4-T_A)/d_A)^4)
 }
 # This function defines adult mortality as a function of temperature
@@ -308,10 +308,10 @@ adult.mortality <- function(t){
 
 c_A*exp(((20-T_A)/d_A)^4)
 
-df8 <- data.frame(t, p(adult.mortality(t)))
+df8 <- data.frame(t, adult.mortality = p(adult.mortality(t)))
 
 #plot of adult mortality as a function of temperature as a function of time
-ggplot(df8, aes(x=t, y=adult.mortality(t)))+
+ggplot(df8, aes(x=t, y=adult.mortality))+
   geom_line()
 
 # Other model parameters [Values obtained from Hamdan and Kilicman, 2020]

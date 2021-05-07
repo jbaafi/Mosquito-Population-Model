@@ -6,7 +6,7 @@
 rm(list = ls())
 
 #set working directory
-setwd("/Users/jbaafi/Desktop/mosquito_population")
+setwd("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population")
 
 # Import packages into r
 library(tidyverse)
@@ -16,12 +16,12 @@ library(ggplot2)
 library(deSolve)
 
 #Import 2011-2016 climate data into r 
-climate_11 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2011_P1D.csv", header = TRUE)
-climate_12 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2012_P1D.csv", header = TRUE)
-climate_13 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2013_P1D.csv", header = TRUE)
-climate_14 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2014_P1D.csv", header = TRUE)
-climate_15 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2015_P1D.csv", header = TRUE)
-climate_16 <- read.csv("/Users/jbaafi/Desktop/mosquito_population/data/en_climate_daily_ON_6153301_2016_P1D.csv", header = TRUE)
+climate_11 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2011_P1D.csv", header = TRUE)
+climate_12 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2012_P1D.csv", header = TRUE)
+climate_13 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2013_P1D.csv", header = TRUE)
+climate_14 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2014_P1D.csv", header = TRUE)
+climate_15 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2015_P1D.csv", header = TRUE)
+climate_16 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2016_P1D.csv", header = TRUE)
 
 # To subset the data for the needed columns
 climate_df_11 <- climate_11 %>% 

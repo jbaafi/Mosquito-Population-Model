@@ -10,6 +10,7 @@ setwd("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population")
 
 # Import packages into r
 library(tidyverse)
+library(scales)
 library(dplyr)
 library(chron)
 library(ggplot2)
@@ -78,7 +79,7 @@ ggplot(data = climate.df, mapping = aes(x=Chron.Date, y=Mean.Temp))+
   ylab("Mean Temperature")+
   theme(axis.text.x=element_text(angle=45, hjust=1))
 
-write.csv(climate.df, file = "climate.df.csv") 
+#write.csv(climate.df, file = "climate.df.csv") 
 
 # Time series plot of total precipitation
 ggplot(data = climate.df, mapping = aes(x=Chron.Date, y=Total.Precip))+
@@ -291,35 +292,34 @@ c_A <- 0.08841
 T_A <- 21.24746
 d_A <- 14.92552
 
-p <- function(x){
-  ind <- which(temp(t)<rep(5))
-  x[ind] <- c_A*exp(((4-T_A)/d_A)^4)
-}
+# p <- function(x){
+#   ind <- which(temp(t)<rep(5))
+#   x[ind] <- c_A*exp(((4-T_A)/d_A)^4)
+# }
 # This function defines adult mortality as a function of temperature
-adult.mortality <- function(t){
-  adult.mortality <-  c_A*exp(((temp(t)-T_A)/d_A)^4)
-  # if(temp(t)<=5){
-  # adult.mortality <-  min(c_A*exp(((temp(t)-T_A)/d_A)^4), c_A*exp(((3-T_A)/d_A)^4))
-  # }
-  # else{adult.mortality <-  c_A*exp(((temp(t)-T_A)/d_A)^4)
-  # }
-  return(adult.mortality)
+f <- function(t){
+  ifelse(temp(t) <= 5, 0.36003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
 }
 
-c_A*exp(((20-T_A)/d_A)^4)
+adult.mortality <- function(t){
+  ad.mort = ifelse(temp(t) <= 5, 0.36003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
+  return(ad.mort)
+}
 
-df8 <- data.frame(t, adult.mortality = p(adult.mortality(t)))
+#c_A*exp(((20-T_A)/d_A)^4)
+
+df8 <- data.frame(t, adult.mortality(t))
 
 #plot of adult mortality as a function of temperature as a function of time
-ggplot(df8, aes(x=t, y=adult.mortality))+
+ggplot(df8, aes(x=t, y=adult.mortality(t)))+
   geom_line()
 
 # Other model parameters [Values obtained from Hamdan and Kilicman, 2020]
-mu_E <- 0.157
-mu_L <- 0.157
-mu_P <- 0.157
-mu_A <- 0.1
-tau <- 0.5 # fraction of mosquitoes that emerge as adult females. 
+mu_E <- 0#0.00157 #0.157
+mu_L <- 0#0.00157
+mu_P <- 0#0.00157
+mu_A <- 0.0001
+tau <- 0.7 # fraction of mosquitoes that emerge as adult females. 
 alpha_b <- 300 # Maximum number of eggs laid per oviposition [value taken from Abdelrazec & Gumel]
 # Ignore density-dependent mortality for now.
 k=10^6
@@ -340,7 +340,7 @@ model <- function(t, y, ...){
   dE <- alpha_b*gen(t)*A*(1-A/k) - (egg.dev(t) + egg.mortality(t) + mu_E)*E
   dL <- egg.dev(t)*E - (larva.dev(t) + larva.mortality(t) + mu_L)*L
   dP <- larva.dev(t)*L - (pupa.dev(t) + pupa.mortality(t) + mu_P)*P
-  dA <- tau*pupa.dev(t)*P - (p(adult.mortality(t)) + mu_A)*A
+  dA <- tau*pupa.dev(t)*P - (adult.mortality(t) + mu_A)*A
   return(list(c(dE, dL, dP, dA)))
   
 }
@@ -354,8 +354,10 @@ y0 <- c(100, 0, 0, 10)
 out <-  ode(y = y0, func = model, times = t, parms = parameters)
 out <- data.frame(out)
 
-
-
+plot(out$time, out$X1, type = "l")
+lines(out$X2, col = "red")
+lines(out$X3, col = "blue")
+lines(out$X4, col = "yellow")
 
 
 

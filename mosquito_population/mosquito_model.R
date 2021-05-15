@@ -331,7 +331,7 @@ model <- function(t, y, ...){
   E = y[1]
   # The number of Larvae
   L = y[2]
-  # The number of Pupa
+  # The number of Puparb
   P = y[3]
   # The number of Matured (Adult) mosquitoes
   A = y[4]
@@ -359,6 +359,6 @@ lines(out$X2, col = "red")
 lines(out$X3, col = "blue")
 lines(out$X4, col = "yellow")
 
-
+ 
 
 

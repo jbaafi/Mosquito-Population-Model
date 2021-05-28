@@ -151,7 +151,7 @@ a <-  mean(climate.df$Mean.Temp) #  8.9231
 b1 <- -8.7635
 b2 <- b1
 
-t_end <- 365*10
+t_end <- 365*5
 #t <- Time
 #dtime = 0.5 # time steps 
 t <-  seq(0, t_end, #dtime
@@ -177,7 +177,8 @@ gamma <- 0.4371833
 
 # This function defines the relationship between temperature and genotrophic cycle
 gen <- function(t){
-  gen <-  gamma*exp(-(temp(t)-beta)^2/alpha)
+  #gen <-  gamma*exp(-(temp(t)-beta)^2/alpha)
+  gen = ifelse(temp(t) <= 10, 0.013, gamma*exp(-(temp(t)-beta)^2/alpha))
   return(gen)
 }
 df1 <- data.frame(t, gen(t))
@@ -249,8 +250,8 @@ d_E <- 1.488e-02
 
 # This function defines egg mortality as a function of temperature
 egg.mortality <- function(t){
-  egg.mortality <-  c_E*(temp(t) - T_E)^2 + d_E
-  #egg.mortality = ifelse(temp(t) <= 5, 0.01, c_E*(temp(t) - T_E)^2 + d_E)
+  #egg.mortality <-  c_E*(temp(t) - T_E)^2 + d_E
+  egg.mortality = ifelse(temp(t) <= 5, 0.25, c_E*(temp(t) - T_E)^2 + d_E)
   return(egg.mortality)
 }
 
@@ -270,12 +271,14 @@ d_L <- 0.2 #1.488e-02
 
 # This function defines larva mortality as a function of temperature
 larva.mortality <- function(t){
-  larva.mortality <-  c_L*(temp(t) - T_L)^2 + d_L
+  #larva.mortality <-  c_L*(temp(t) - T_L)^2 + d_L
+  larva.mortality = ifelse(temp(t) <= 5, 0.25, c_L*(temp(t) - T_L)^2 + d_L)
   return(larva.mortality)
 }
 
 df6 <- data.frame(t, larva.mortality(t))
 
+plot(temp(t), larva.mortality(t), "l")
 #plot of larva mortality as a function of temperature as a function of time
 ggplot(df6, aes(x=t, y=larva.mortality(t)))+
   geom_line()
@@ -307,12 +310,8 @@ d_A <- 14.92552
 #   x[ind] <- c_A*exp(((4-T_A)/d_A)^4)
 # }
 # This function defines adult mortality as a function of temperature
-f <- function(t){
-  ifelse(temp(t) <= 5, 0.36003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
-}
-
 adult.mortality <- function(t){
-  ad.mort = ifelse(temp(t) <= 5, 0.25003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
+  ad.mort = ifelse(temp(t) <= 5, 0.2500, c_A*exp(((temp(t)-T_A)/d_A)^4))
   return(ad.mort)
 }
 

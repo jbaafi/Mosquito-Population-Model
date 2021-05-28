@@ -151,7 +151,7 @@ a <-  mean(climate.df$Mean.Temp) #  8.9231
 b1 <- -8.7635
 b2 <- b1
 
-t_end <- 365
+t_end <- 365*10
 #t <- Time
 #dtime = 0.5 # time steps 
 t <-  seq(0, t_end, #dtime
@@ -182,21 +182,27 @@ gen <- function(t){
 }
 df1 <- data.frame(t, gen(t))
 
+plot(temp(t), gen(t), "l")
 #plot of genotrophic cycle as a function of temperature as a function of time
 ggplot(df1, aes(x=t, y=gen(t)))+
   geom_line()
 
 # Fit scalars in egg development rate function
-alpha_e <- 1337.666814
-beta_e <- 75.098187
-gamma_e <- 4.049403 
+ alpha_e <- 1337.666814
+ beta_e <- 75.098187
+ gamma_e <- 4.049403 
 
 # This function defines the relationship between temperature and genotrophic cycle
 egg.dev <- function(t){
-  egg <-  gamma_e*exp(-(temp(t)-beta_e)^2/alpha_e)
+  #egg <-  gamma_e*exp(-(temp(t)-beta_e)^2/alpha_e)
+  egg = ifelse(temp(t) <= 5, 0.0000, gamma_e*exp(-(temp(t)-beta_e)^2/alpha_e))
   return(egg)
 }
+
 df2 <- data.frame(t, egg.dev(t))
+plot(temp(t), egg.dev(t), "l")
+plot(t, egg.dev(t), "l")
+min(egg.dev(t))
 
 #plot of egg development as a function of temperature as a function of time
 ggplot(df2, aes(x=t, y=egg.dev(t)))+
@@ -214,6 +220,7 @@ larva.dev <- function(t){
 }
 df3 <- data.frame(t, larva.dev(t))
 
+plot(temp(t), larva.dev(t), "l")
 #plot of larva development as a function of temperature as a function of time
 ggplot(df3, aes(x=t, y=larva.dev(t)))+
   geom_line()
@@ -243,10 +250,13 @@ d_E <- 1.488e-02
 # This function defines egg mortality as a function of temperature
 egg.mortality <- function(t){
   egg.mortality <-  c_E*(temp(t) - T_E)^2 + d_E
+  #egg.mortality = ifelse(temp(t) <= 5, 0.01, c_E*(temp(t) - T_E)^2 + d_E)
   return(egg.mortality)
 }
 
 df5 <- data.frame(t, egg.mortality(t))
+
+plot(temp(t), egg.mortality(t), "l")
 
 #plot of egg mortality as a function of temperature as a function of time
 ggplot(df5, aes(x=t, y=egg.mortality(t)))+
@@ -302,7 +312,7 @@ f <- function(t){
 }
 
 adult.mortality <- function(t){
-  ad.mort = ifelse(temp(t) <= 5, 0.36003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
+  ad.mort = ifelse(temp(t) <= 5, 0.25003054, c_A*exp(((temp(t)-T_A)/d_A)^4))
   return(ad.mort)
 }
 
@@ -310,6 +320,7 @@ adult.mortality <- function(t){
 
 df8 <- data.frame(t, adult.mortality(t))
 
+plot(temp(t), adult.mortality(t), "l")
 #plot of adult mortality as a function of temperature as a function of time
 ggplot(df8, aes(x=t, y=adult.mortality(t)))+
   geom_line()

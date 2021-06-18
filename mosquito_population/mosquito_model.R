@@ -151,7 +151,7 @@ a <-  mean(climate.df$Mean.Temp) #  8.9231
 b1 <- -8.7635
 b2 <- b1
 
-t_end <- 365*2
+t_end <- 365*6
 #t <- Time
 #dtime = 0.5 # time steps 
 t <-  seq(0, t_end, #dtime
@@ -371,15 +371,21 @@ y0 <- c(100, 0, 0, 10)
 out <-  ode(y = y0, func = model, times = t, parms = parameters)
 out <- data.frame(out)
 
-plot(out$time, out$X1, type = "l")
+plot(out$time, out$X1, type = "l", xlab = "Time (days)", ylab = "Stage Population", 
+     main = "Population Dynamics over a period of 6yrs")
 lines(out$X2, col = "red")
 lines(out$X3, col = "blue")
 lines(out$X4, col = "yellow")
 
+plot(out$time, out$X4, type = "l")
 
 # the idea is to plot abundance with temperature on same space to compare whether it makes sense
 # edit this a little bit to see how it works out to be
-#par(mfrow=c(2,1))
-#plot(out$time, out$X1, type = "l", col = "blue")
-#plot(df$t, df$temp.t., type = "l", col = "red")
+# par(mfrow=c(3,1))
+# plot(out$time, out$X1, type = "l", col = "blue", xlab = "Time (days)", 
+#      ylab = "Egg Population")
+# plot(out$time, out$X4, type = "l", col = "blue", xlab = "Time (days)", 
+#      ylab = "Adult population")
+# plot(df$t, df$temp.t., type = "l", col = "red", xlab = "Time (days)", 
+#      ylab = expression(paste("Temperature, ",degree,"C")))
 

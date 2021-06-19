@@ -148,7 +148,7 @@ summary(fitprecip.lm)
 
 #Model parameters
 a <-  mean(climate.df$Mean.Temp) #  8.9231 
-b1 <- -8.7635
+b1 <-  -8.7635
 b2 <- b1
 
 t_end <- 365*6
@@ -371,13 +371,27 @@ y0 <- c(100, 0, 0, 10)
 out <-  ode(y = y0, func = model, times = t, parms = parameters)
 out <- data.frame(out)
 
-plot(out$time, out$X1, type = "l", xlab = "Time (days)", ylab = "Stage Population", 
-     main = "Population Dynamics over a period of 6yrs")
+plot(out$time, out$X1, type = "l", xlab = "Time (days)", ylab = "Stage size",
+     main = "Population Dynamics")
 lines(out$X2, col = "red")
 lines(out$X3, col = "blue")
 lines(out$X4, col = "yellow")
 
-plot(out$time, out$X4, type = "l")
+
+# This is used to compare plots for different constant temp values by lying them 
+# side by side 
+# library(cowplot)
+# plot1 <- ggplot(data = out)+
+#   geom_line(mapping = aes(x=time, y=X1, colour="egg"))+
+#   geom_line(mapping = aes(x=time, y=X2, colour="larva"))
+# 
+# plot2 <- ggplot(data = out)+
+#   geom_line(mapping = aes(x=time, y=X3, colour="pupa"))+
+#   geom_line(mapping = aes(x=time, y=X4, colour="adult"))
+#   
+# plot_grid(plot1, plot2, labels = "AUTO")
+
+#plot(out$time, out$X4, type = "l")
 
 # the idea is to plot abundance with temperature on same space to compare whether it makes sense
 # edit this a little bit to see how it works out to be
@@ -388,4 +402,5 @@ plot(out$time, out$X4, type = "l")
 #      ylab = "Adult population")
 # plot(df$t, df$temp.t., type = "l", col = "red", xlab = "Time (days)", 
 #      ylab = expression(paste("Temperature, ",degree,"C")))
+
 

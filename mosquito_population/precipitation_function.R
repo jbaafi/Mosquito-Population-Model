@@ -141,6 +141,6 @@ plot(year1$Days.Since.Origin, year1$Total.Precip, type = "l")
 
 #ggplot
 ggplot(data = year1, mapping = aes(x=Days.Since.Origin, y=Total.Precip))+
-  geom_line()
+  geom_point()
 
 

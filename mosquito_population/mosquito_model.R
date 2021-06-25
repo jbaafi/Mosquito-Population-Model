@@ -56,7 +56,7 @@ climate.df <- climate_df %>%
 # Formatting time data in a form that chron can understand 
 daily_dates <- dates(paste(climate.df$Month, 
                            climate.df$Day, 
-                           climate.df$Year, sep="/")) 
+                           climate.df$Year, sep="/"))
 climate.df$Chron.Date <-chron(dates=daily_dates, 
                               origin. = c(month = 1,day = 1,
                                           year = 2011)) # setting date into chron

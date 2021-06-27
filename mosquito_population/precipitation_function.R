@@ -137,7 +137,7 @@ ggplot(data = precip.df, mapping = aes(x=t, y=precip(t)))+
 year1 <- head(climate.df, 375)
 
 # base plot
-plot(year1$Days.Since.Origin, year1$Total.Precip, type = "l")
+plot(year1$Days.Since.Origin, year1$Total.Precip)
 
 #ggplot
 ggplot(data = year1, mapping = aes(x=Days.Since.Origin, y=Total.Precip))+

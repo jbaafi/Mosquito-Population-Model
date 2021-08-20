@@ -1,8 +1,5 @@
 # coding=utf-8
-# want to use this code to perform SSA of a mosquito population dynamics model
-# Importing packages
-# Importing packages
-import numpy as np
+mport numpy as np
 import matplotlib
 matplotlib.use('tkagg')
 import matplotlib.pyplot as plt

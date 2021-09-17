@@ -53,7 +53,7 @@ climate.df <- climate_df %>%
          Total.Precip = Total.Precip..mm.
   )
 
-# Formatting time data in a form that chron can understand 
+# Formatting time data in a form that chron can understand
 daily_dates <- dates(paste(climate.df$Month, 
                            climate.df$Day, 
                            climate.df$Year, sep="/")) 

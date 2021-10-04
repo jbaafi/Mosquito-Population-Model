@@ -16,7 +16,7 @@ library(chron)
 library(ggplot2)
 library(deSolve)
 
-#Import 2011-2016 climate data into r 
+#Import 2011-2016 climate data into r
 climate_11 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2011_P1D.csv", header = TRUE)
 climate_12 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2012_P1D.csv", header = TRUE)
 climate_13 <- read.csv("/Users/jbaafi/Desktop/Mosquito population dynamics/mosquito_population/data/en_climate_daily_ON_6153301_2013_P1D.csv", header = TRUE)
@@ -53,7 +53,7 @@ climate.df <- climate_df %>%
          Total.Precip = Total.Precip..mm.
   )
 
-# Formatting time data in a form that chron can understand 
+# Formatting time data in a form that chron can understand
 daily_dates <- dates(paste(climate.df$Month, 
                            climate.df$Day, 
                            climate.df$Year, sep="/"))
@@ -112,7 +112,7 @@ lines(fit, col="red")
 lines(Time, pred, col="blue")
 summary(fit.lm)
 
-#Plotting with same data as above with ggplot2
+#Plotting same data as above with ggplot2
 ggplot(data = climate.df)+
   geom_point(mapping = aes(x=Days.Since.Origin, y=Mean.Temp))+
   geom_line(mapping = aes(x=Days.Since.Origin, y=fit, colour="red"))+
@@ -144,6 +144,13 @@ lines(fitprecip, col="red")
 lines(Time, predprecip, col="blue")
 summary(fitprecip.lm)
 
+# It is observed from the above plot that fitting a periodic function to the data
+# does not give a very good fit. The rainfall data appears to occur randomly hence
+# would be great to fit a probability density function. 
+
+#Summary: I have been able to find a periodic function that is able to estimate the 
+# average temperature dataset. The function is cas(x) = sin(x) + cos(x). 
+# I have to find a probability density function to estimate the rainfall dataset. 
 ################################################################################
 
 #Model parameters

@@ -7,32 +7,37 @@ rm(list = ls())
 
 #Load R package for solving diff equations
 library(deSolve)
+library(ggplot2)
+library(scales)
+
 
 #Set working directory 
-#setwd("/Users/hurford1/Documents/jb")
+setwd("/Users/jbaafi/Desktop/Mosquito population dynamics")
 
 # Function to return rate of change of the states in the ODE model
 model <- function(t, state, parameters) {
   with(as.list(c(state, parameters)), { 
-    dE<- phi*(1-(A/K))*A - (deltaE+muE+pieE)*E
+    dE<- b*phi*(1-(E/K))*A - (deltaE+muE+pieE)*E
     dL<- deltaE*E - (deltaL+muL+pieL + sigmaL*L)*L
     dP <- deltaL*L - (deltaP+muP+pieP)*P
     dA <- chi*deltaP*P - (muA+pieA)*A
     list(c(dE, dL, dP, dA))
   })
 }
+
 # Set of parameter values used in the model
 parameters <- c(
-  phi = 10.7,
-  K = 10^6,
-  deltaE = 0.4,
-  deltaL = 0.14,
+  b = 300,
+  phi = 3,
+  K = 10^3,
+  deltaE = 0.55,
+  deltaL = 0.20,
   deltaP = 0.3,
-  muE =  0.36,#0.0143 # value taken from Hamdan & Kilicman, 2020
+  muE =  0.3,#0.0143 # value taken from Hamdan & Kilicman, 2020
   muL = 0.30, #0.0143 # value taken from Hamdan & Kilicman, 2020
   muP = 0.15, #0.0143 # value taken from Hamdan & Kilicman, 2020
   muA = 0.10,   # value taken from Hamdan & Kilicman, 2020
-  pieE = 0.11,
+  pieE = 0.011,
   pieL = 0.10,
   pieP =  0.01,
   pieA = 0.07,
@@ -42,13 +47,13 @@ parameters <- c(
 
 # Initial conditions
 state <- c(
-  E = 1, 
-  L = 1, 
-  P = 1,
-  A = 1)
+  E = 100, 
+  L = 0, 
+  P = 0,
+  A = 0)
 
 # Time steps in running the model
-times <- seq(0, 500, by = 0.01)
+times <- seq(0, 200, by = 0.01)
 
 # solving the system with ode function from the deSolve package
 out <- ode(y = state, times = times, func = model, parms = parameters)
@@ -65,9 +70,30 @@ lines(out$time, out$P, col = "red")
 legend( "topright", c("A(t)", "E(t)", "L(t)", "P(t)"), 
         text.col=c("blue", "green", "yellow","red") )
 
+
+# A few math expressions to produce a good plot
+out$Egg <- out$E/10^3
+out$Larvae <- out$L/10^3
+out$Pupae <- out$P/10^3
+out$Adult <- out$A/10^3
+
+plot(out$time, out$Egg, type = "l", col = "green", ylab = "Density (in thousands)")
+lines(out$time, out$Larvae, col = "red")
+lines(out$time, out$Pupae, col = "blue")
+lines(out$time, out$Adult, col = "yellow")
+legend( "right", c("Eggs", "Larvae", "Pupae", "Adults"), 
+        text.col=c("green", "red", "blue","yellow") )
+
+
+ggplot(out,aes(x=time, y=E)) + 
+  geom_line() +
+  scale_y_continuous(labels = label_number(suffix = " T", scale = 1e-3))
+
+
+
 ##################################################################################################
 # This lines of code helps to find the basic reproduction number of the model above
-phi = 10.7
+phi = 30
 K = 10^6
 deltaE = 0.4
 deltaL = 0.14
@@ -95,3 +121,8 @@ Temperature = c(28.3, 28.1, 29.3, 28.3, 28.6, 28.4, 28.0, 28.5, 28.0, 27.9, 27.0
 phi.values <- c(8.294, 8.294, 8.704, 8.294, 8.704, 8.295, 8.294, 8.704, 7.741, 7.082, 7.084, 7.084)
 data <- data.frame(time, Temperature, phi.values)
 
+max <- max(out$E)
+df <- out$E/max
+df
+
+out$new_col <- df

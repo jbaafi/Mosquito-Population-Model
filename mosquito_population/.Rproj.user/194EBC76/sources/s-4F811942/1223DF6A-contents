@@ -1,0 +1,105 @@
+#Clear workspace
+rm(list = ls())
+
+#set working directory
+setwd("/Users/jbaafi/Documents/Research@MUN/model parameterization data")
+
+# Import packages into rcd
+
+library(tidyverse)
+library(dplyr)
+library(chron)
+library(ggplot2)
+
+# Functional forms and parametrization [data taken from Ewing et al, 2016 
+#and Beck-Johnson et al, 2013]
+
+# Data on development rates primarily from Beck-Johnson et al
+juv.death.data <- data.frame("temp" = c(18, 20, 22, 24, 26, 28, 30, 32),
+                        "paper1" = c(0.04, 0.02, 0.017, 0.02, 0.03, 0.04, 0.13, 0.10),
+                        "paper2" = c(0.036, 0.012, 0.017, 0.015, 0.024, 0.035, 0.11, 0.11)
+)
+
+#visualize data
+plot(juv.death.data$temp, juv.death.data$paper1, pch=19, ylim = c(0.01, 0.15))
+points(juv.death.data$temp, juv.death.data$paper2, col = "red", pch = 0)
+
+juv.df.1 <- juv.death.data[,1:2] 
+juv.df.1$sym <- rep("paper 1", 8)
+juv.df.2 <- juv.death.data[,c(1,3)] 
+juv.df.2$sym <- rep("paper 2", 8)
+
+juv.df.1 <- juv.df.1 %>% 
+  rename(
+    mortality.rate = paper1,
+  )
+
+juv.df.2 <- juv.df.2 %>% 
+  rename(
+    mortality.rate = paper2,
+  )
+
+juv.df.total <- rbind(juv.df.1, juv.df.2)
+
+#visualize the new juvinile mortality data.frame
+plot(juv.df.total$temp, juv.df.total$mortality.rate)
+#rbindlist(list(new.df.1,new.df.2))
+
+ggplot(data = juv.df.total, mapping = aes(x=temp, y=mortality.rate))+
+  geom_jitter(aes(colour=factor(sym)))
+
+
+juv.df.total<- filter(juv.df.total, !is.na(temp), !is.na(mortality.rate)) 
+
+# Fitting a polynomial to the larva development dataset
+x <- juv.df.total$temp
+y <- juv.df.total$mortality.rate
+#third degree
+fit1 <- lm(y~poly(x,3,raw=TRUE))
+#fourth degree
+fit2 <- lm(y~poly(x,4,raw=TRUE))
+#generate range of numbers starting from 0 and ending at 40
+xx <- seq(0, 40)
+plot(x,y,pch=19)
+lines(xx, predict(fit1, data.frame(x=xx)), col="red")
+lines(xx, predict(fit2, data.frame(x=xx)), col="blue")
+
+summary(fit1)
+summary(fit2)
+
+#visualizing with ggplot2
+ggplot(juv.df.total, aes(x=temp, y=mortality.rate)) +
+  geom_jitter(aes(colour=factor(sym)))+
+  geom_line(aes(x=temp, y=predict(fit1), colour = "fit"))+
+  geom_line(aes(x=temp, y=predict(fit2), colour = "fit2"))
+
+#############################################################################
+#Fitting a non-linear function to the data using the nls() function
+juv.df.total <- juv.df.total[order(juv.df.total$temp),]
+
+x <- juv.df.total$temp
+y <- juv.df.total$mortality.rate
+xx <- seq(0, 40)
+plot(x, y)
+
+a <- 0.015
+b <- 23
+c <- 0.0012
+y1 <-  c*(xx-b)^2+a
+
+plot(x, y1, "l") 
+points(x, y)
+
+
+m <- nls(y ~ c*(x-b)^2+a, data = juv.df.total, start = list(a = 0.015, b = 23, c=0.0012))
+
+plot(x, y)
+lines(x, predict(m))
+
+summary(m)
+##############################################################################
+# Fitting a gausian function to the data
+
+
+
+

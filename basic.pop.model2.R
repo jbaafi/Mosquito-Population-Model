@@ -19,8 +19,8 @@ pop.model <- function(t, y, ...){
   P = y[3]
   A = y[4]
   # The system of equations (This model is based on Lutambi et al, 2013)
-  #dE <- b*phiA*(1-E/k)*A - (FE + muE)*E
-  dE <- b*(1-E/k)*A - FE*E - muE*E
+  dE <- b*phiA*(1-A/k)*A - (FE + muE)*E
+  #dE <- b*(1-A/k)*A - FE*E - muE*E
   dL <- FE*E - (FL + muL + deltaL*L)*L
   dP <- FL*L - (FP + muP)*P
   dA <- sigma*FP*P - (muA)*A
@@ -52,7 +52,7 @@ print(paste0("The value of R0 is ", R0))
 y.initial <- c(0.0, 0.0, 0.0, 10.0)
 
 # Time steps (Period with which to run the simulation)
-times <- seq(0, 150, by = 0.01)
+times <- seq(0, 100, by = 0.01)
 
 # Numerical integration using the ode() function from deSolve package
 out <-  ode(y = y.initial, func = pop.model, times = times, parms = param)
